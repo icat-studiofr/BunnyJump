@@ -1,0 +1,285 @@
+
+bunny.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+platform
+  rotate: false
+  xy: 1, 893
+  size: 380, 94
+  orig: 380, 94
+  offset: 0, 0
+  index: -1
+platform_broken
+  rotate: false
+  xy: 1, 797
+  size: 380, 94
+  orig: 380, 94
+  offset: 0, 0
+  index: -1
+bubble
+  rotate: false
+  xy: 1, 580
+  size: 211, 215
+  orig: 211, 215
+  offset: 0, 0
+  index: -1
+bunny_sky
+  rotate: false
+  xy: 383, 806
+  size: 150, 181
+  orig: 150, 181
+  offset: 0, 0
+  index: -1
+bunny_stand
+  rotate: false
+  xy: 1, 371
+  size: 120, 207
+  orig: 120, 207
+  offset: 0, 0
+  index: -1
+bunny_dead
+  rotate: false
+  xy: 214, 621
+  size: 150, 174
+  orig: 150, 174
+  offset: 0, 0
+  index: -1
+bunny_jump
+  rotate: false
+  xy: 1, 168
+  size: 120, 201
+  orig: 120, 201
+  offset: 0, 0
+  index: -1
+wingMan3
+  rotate: false
+  xy: 535, 886
+  size: 216, 101
+  orig: 216, 101
+  offset: 0, 0
+  index: -1
+wingMan4
+  rotate: false
+  xy: 753, 886
+  size: 216, 101
+  orig: 216, 101
+  offset: 0, 0
+  index: -1
+wingMan2
+  rotate: false
+  xy: 535, 777
+  size: 206, 107
+  orig: 206, 107
+  offset: 0, 0
+  index: -1
+jetpack
+  rotate: false
+  xy: 1, 6
+  size: 133, 160
+  orig: 133, 160
+  offset: 0, 0
+  index: -1
+sun2
+  rotate: false
+  xy: 743, 742
+  size: 148, 142
+  orig: 148, 142
+  offset: 0, 0
+  index: -1
+sun1
+  rotate: false
+  xy: 123, 430
+  size: 142, 148
+  orig: 142, 148
+  offset: 0, 0
+  index: -1
+flyMan_fly
+  rotate: false
+  xy: 123, 289
+  size: 122, 139
+  orig: 122, 139
+  offset: 0, 0
+  index: -1
+spring_out
+  rotate: false
+  xy: 123, 177
+  size: 145, 110
+  orig: 145, 110
+  offset: 0, 0
+  index: -1
+flyMan_stand
+  rotate: false
+  xy: 136, 36
+  size: 122, 139
+  orig: 122, 139
+  offset: 0, 0
+  index: -1
+springMan_hurt
+  rotate: false
+  xy: 893, 743
+  size: 110, 141
+  orig: 110, 141
+  offset: 0, 0
+  index: -1
+springMan_stand
+  rotate: false
+  xy: 267, 478
+  size: 110, 141
+  orig: 110, 141
+  offset: 0, 0
+  index: -1
+flyMan_jump
+  rotate: false
+  xy: 267, 341
+  size: 122, 135
+  orig: 122, 135
+  offset: 0, 0
+  index: -1
+spring
+  rotate: false
+  xy: 383, 727
+  size: 145, 77
+  orig: 145, 77
+  offset: 0, 0
+  index: -1
+spring_in
+  rotate: false
+  xy: 530, 718
+  size: 145, 57
+  orig: 145, 57
+  offset: 0, 0
+  index: -1
+gold4
+  rotate: false
+  xy: 366, 711
+  size: 15, 84
+  orig: 15, 84
+  offset: 0, 0
+  index: -1
+bronze3
+  rotate: false
+  xy: 971, 903
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: -1
+bronze1
+  rotate: false
+  xy: 270, 255
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+gold1
+  rotate: false
+  xy: 270, 169
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+silver1
+  rotate: false
+  xy: 260, 83
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+wing_left
+  rotate: false
+  xy: 260, 7
+  size: 85, 74
+  orig: 85, 74
+  offset: 0, 0
+  index: -1
+bronze2
+  rotate: false
+  xy: 356, 255
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: -1
+gold2
+  rotate: false
+  xy: 356, 169
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: -1
+silver2
+  rotate: false
+  xy: 346, 83
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: -1
+wing_right
+  rotate: false
+  xy: 347, 7
+  size: 85, 74
+  orig: 85, 74
+  offset: 0, 0
+  index: -1
+gold3
+  rotate: false
+  xy: 414, 83
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: -1
+silver3
+  rotate: false
+  xy: 677, 691
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: -1
+carrot
+  rotate: false
+  xy: 729, 670
+  size: 78, 70
+  orig: 78, 70
+  offset: 0, 0
+  index: -1
+powerup_bubble
+  rotate: false
+  xy: 809, 670
+  size: 71, 70
+  orig: 71, 70
+  offset: 0, 0
+  index: -1
+flame
+  rotate: false
+  xy: 434, 1
+  size: 41, 80
+  orig: 41, 80
+  offset: 0, 0
+  index: -1
+bronze4
+  rotate: false
+  xy: 247, 344
+  size: 14, 84
+  orig: 14, 84
+  offset: 0, 0
+  index: -1
+silver4
+  rotate: false
+  xy: 366, 625
+  size: 14, 84
+  orig: 14, 84
+  offset: 0, 0
+  index: -1
+powerup_jetpack
+  rotate: false
+  xy: 383, 655
+  size: 71, 70
+  orig: 71, 70
+  offset: 0, 0
+  index: -1
+powerup_wings
+  rotate: false
+  xy: 456, 655
+  size: 71, 70
+  orig: 71, 70
+  offset: 0, 0
+  index: -1
