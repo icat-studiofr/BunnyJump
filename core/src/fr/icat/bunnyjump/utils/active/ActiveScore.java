@@ -29,8 +29,6 @@ public class ActiveScore implements iActiveScore{
 
     @Override
     public boolean scoreIsReady() {
-        return BunnyEntity.inst().bunnyComponent == null ?
-                    0 >= score
-                    : BunnyEntity.inst().bunnyComponent.score >= score;
+        return BunnyEntity.score >= score;
     }
 }

@@ -7,7 +7,7 @@ import fr.icat.bunnyjump.consts.PathConst;
 
 public enum MyRegions {
 
-    BACKGROUND("background.png", true),
+    BACKGROUND("back.jpg", true),
 
     /**
      * Bunny

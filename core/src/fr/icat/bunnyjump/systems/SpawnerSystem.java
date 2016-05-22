@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -69,8 +70,17 @@ public final class SpawnerSystem extends EntitySystem {
 
     boolean init = true;
 
+    Camera camera;
+
+    int cpt;
+
+    public SpawnerSystem(Camera camera){
+        this.camera = camera;
+    }
+
     private boolean exec(){
-        return -30 < higherEntity.get(Mapper.PlatformCollision);
+        return camera.position.y - WorldData.SIZE.H / 2 - 50 <
+                higherEntity.get(Mapper.PlatformCollision);
     }
 
     @Override
@@ -85,6 +95,8 @@ public final class SpawnerSystem extends EntitySystem {
             for (iGrouper<iBuilderPack> grp :
                     gen.getGroupers()) {
                 spawn(grp.exec());
+
+                if(cpt >= 4) Gdx.app.error("a", String.valueOf(cpt));
             }
         }
 
@@ -93,7 +105,10 @@ public final class SpawnerSystem extends EntitySystem {
 
     private void spawn(iBuilderPack builderPack) {
 
-        if(builderPack == null) { return; }
+        if(builderPack == null) {
+            cpt++;
+            return;
+        }
 
         range = builderPack.getRanges().get();
         secureZone = builderPack.getSecureZone();
@@ -107,6 +122,7 @@ public final class SpawnerSystem extends EntitySystem {
 
         if(grid.height < 0 || grid.width < 0) {
             Gdx.app.error("STOP", "GRID");
+            cpt++;
             return;
         }
 
@@ -116,8 +132,11 @@ public final class SpawnerSystem extends EntitySystem {
         if(spawnablePos.size == 0) {
             Gdx.app.error("STOP", "SPAWN POS");
             Gdx.app.error("STOP", String.valueOf(entity.getClass()));
+            cpt++;
             return;
         }
+
+        cpt = 0;
 
         this.initComponent();                           // Components initialisation
         this.selectPos();                               // Select spawn position
@@ -149,7 +168,7 @@ public final class SpawnerSystem extends EntitySystem {
 
         for (int i = secureZoneArray.size - 1; i >= 0; i--)
         {
-            if(!init && secureZoneArray.get(i).y > 0){
+            if(!init && secureZoneArray.get(i).y > camera.position.y - WorldData.SIZE.H / 2){
                 secureZoneArray.removeIndex(i);
             } else if(secureZoneArray.get(i).overlaps(grid)) {
                 badZones.add(secureZoneArray.get(i));
@@ -290,24 +309,6 @@ public final class SpawnerSystem extends EntitySystem {
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * Met à jour les secureZone et les HigherPos lors du déplacement en arrière plan des
-     * entités
-     * @param veloY
-     */
-    public void updateVeloY(float veloY){
-
-        for (ComponentMapper mapper :
-                higherEntity.keys()) {
-            higherEntity.put(mapper, higherEntity.get(mapper) + veloY);
-        }
-
-        for (Rectangle secZone :
-                secureZoneArray) {
-            secZone.y += veloY;
         }
     }
 }

@@ -3,6 +3,7 @@ package fr.icat.bunnyjump.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -15,16 +16,19 @@ import java.util.Comparator;
 public final class RenderSystem extends IteratingSystem {
 
     Sprite sprite;
+    Camera camera;
     SpriteBatch batch;
     Array<Entity> renderableArray = new Array<Entity>();
     Comparator<Entity> zComparator;
     TransformComponent transformComp;
     TextureComponent textureComp;
 
-    public RenderSystem(SpriteBatch batch){
+    public RenderSystem(SpriteBatch batch, Camera camera){
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
+
         this.batch = batch;
         this.sprite = new Sprite();
+        this.camera = camera;
 
         zComparator = new Comparator<Entity>() {
             @Override public int compare(Entity e1, Entity e2) {
@@ -41,6 +45,7 @@ public final class RenderSystem extends IteratingSystem {
 
         renderableArray.sort(zComparator);
 
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
         for (Entity e :

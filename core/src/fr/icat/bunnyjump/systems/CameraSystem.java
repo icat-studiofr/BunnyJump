@@ -1,32 +1,52 @@
 package fr.icat.bunnyjump.systems;
 
-import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
-import fr.icat.bunnyjump.components.CameraComponent;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
+import fr.icat.bunnyjump.components.BackgroundComponent;
+import fr.icat.bunnyjump.components.BunnyComponent;
 import fr.icat.bunnyjump.components.TransformComponent;
 import fr.icat.bunnyjump.consts.Mapper;
+import fr.icat.bunnyjump.data.WorldData;
+import fr.icat.bunnyjump.entities.asset.BackgroundEntity;
 
 /**
  *
  */
-public final class CameraSystem extends IteratingSystem {
+public final class CameraSystem extends EntitySystem {
 
-    CameraComponent cameraComponent;
-    TransformComponent transformTarget;
+    Camera camera;
 
-    public CameraSystem() {
-        super(Family.all(CameraComponent.class).get());
+    TransformComponent transformBackground;
+    TransformComponent transformBunny;
+
+    public CameraSystem(OrthographicCamera c) {
+        this.camera = c;
     }
 
     @Override
-    protected void processEntity(Entity entity, float deltaTime) {
+    public void addedToEngine(Engine engine) {
 
+        transformBackground = Mapper.Transform.get(
+                engine.getEntitiesFor(Family.all(BackgroundComponent.class).get()).first());
 
-        cameraComponent = Mapper.Camera.get(entity);
-        transformTarget = Mapper.Transform.get(cameraComponent.target);
+        transformBunny = Mapper.Transform.get(
+                engine.getEntitiesFor(Family.all(BunnyComponent.class).get()).first());
+    }
 
-        cameraComponent.camera.position.y = Math.min(
-                cameraComponent.camera.position.y, transformTarget.pos.y);
+    @Override
+    public void update(float deltaTime) {
+
+        camera.position.y = Math.min(
+                camera.position.y, transformBunny.pos.y);
+
+        camera.update();
+
+        transformBackground.setPos(camera.position.x - WorldData.SIZE.W / 2,
+                camera.position.y - WorldData.SIZE.H / 2);
+
     }
 }

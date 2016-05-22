@@ -28,25 +28,17 @@ import fr.icat.bunnyjump.listeners.transform.FlipTextureListener;
  */
 public final class BunnyEntity extends Entity{
 
-    private static final BunnyEntity outInst = new BunnyEntity();
+    public static int score = 0;
 
-    public static BunnyEntity inst(){
-        return outInst;
+    public BunnyEntity() {
+        init();
     }
 
-    private BunnyEntity() {}
+    public void init(){
 
-    // --
+        score = 0;
 
-    public BunnyComponent bunnyComponent;
-
-    public BunnyEntity init(){
-
-        this.removeAll();
-
-        bunnyComponent = new BunnyComponent();
-
-        this.add(bunnyComponent)
+        this.add(new BunnyComponent())
             .add(new TextureComponent())
             .add(new GravityComponent())
             .add(new CarrotAttackComponent())
@@ -69,7 +61,6 @@ public final class BunnyEntity extends Entity{
         TransformComponent transformComponent =
                 new TransformComponent(this, BunnyData.POS.START, BunnyData.SIZE.VECTOR);
         transformComponent.moveSignal.add(MoveListener.inst());
-        //transformComponent.resizeSignal.add(ResizeListener.inst());
 
         TSC tsc = new TSC(this, BunnyData.STATES.TEXTURE_STATE_MAP, BunnyData.STATES.JUMP);
         tsc.newStateSignal.add(BunnyNewStateListener.inst());
@@ -81,6 +72,5 @@ public final class BunnyEntity extends Entity{
             .add(jumperCollisionComponent)
             .add(new MonsterDefenseCollisionComponent(this, lifeComponent, BunnyData.COLLISION.MONSTER_DEFENSE));
 
-        return this;
     }
 }

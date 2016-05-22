@@ -3,6 +3,7 @@ package fr.icat.bunnyjump.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import fr.icat.bunnyjump.components.CameraComponent;
@@ -21,7 +22,7 @@ public final class ClearSystem extends IteratingSystem{
 
     public ClearSystem(OrthographicCamera camera) {
         super(Family.all(TransformComponent.class)
-                .exclude(TransportableComponent.class, CameraComponent.class).get());
+                .exclude(TransportableComponent.class).get());
         this.camera = camera;
     }
 
@@ -65,15 +66,21 @@ public final class ClearSystem extends IteratingSystem{
     private boolean checkEntity(Entity entity){
         final TransformComponent transform = Mapper.Transform.get(entity);
 
-        if(transform.pos.y > WorldData.SIZE.H || transform.pos.x + transform.size.x < 0
+        boolean notClear = true;
+
+        if(transform.pos.y > camera.position.y + WorldData.SIZE.H / 2
+                || transform.pos.x + transform.size.x < 0
                 || transform.pos.x > WorldData.SIZE.W){
-            return false;
+            notClear = false;
         }
 
-        if(transform.pos.y + transform.size.y < 0 && Mapper.Carrot.has(entity)){
-            return  false;
+        if(notClear
+                && Mapper.Carrot.has(entity)
+                && transform.pos.y + transform.size.y < camera.position.y - WorldData.SIZE.H / 2
+        ){
+            notClear = false;
         }
 
-        return true;
+        return notClear;
     }
 }

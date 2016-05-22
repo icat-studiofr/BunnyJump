@@ -12,21 +12,6 @@ import com.badlogic.gdx.utils.Array;
 public abstract class AbsScreenLoader {
 
     /**
-     * Class des systems utilisés par le screen
-     */
-    private Array<Class<? extends EntitySystem>> classSystems;
-
-    public AbsScreenLoader(){
-        this.classSystems = new Array<Class<? extends EntitySystem>>();
-        this.init();
-    }
-
-    /**
-     * A override pour chaque screen, permet d'ajouter des systems à l'instanciation du screen
-     */
-    protected abstract void init();
-
-    /**
      * A override pout chaque screen, permet d'ajouter des entités au moteur, à appeller
      * dans la méthode Show() du screen
      * @param e Moteur
@@ -36,22 +21,24 @@ public abstract class AbsScreenLoader {
     protected abstract void addEntities(Engine e, SpriteBatch b, OrthographicCamera c);
 
     /**
-     * Ajoute une classe à la liste
+     * Ajoute les systems au moteur
+     * @param e
+     * @param b
+     * @param c
      */
-    protected void addSystem(final Class<? extends EntitySystem>... clazz){
-        this.classSystems.addAll(clazz);
-    }
+    protected abstract void addSystems(Engine e, SpriteBatch b, OrthographicCamera c);
 
     /**
-     * Désactive les systems utilisés par le screen et supprime toute les entités du moteur.
-     * A appeler dans la méthode Hide() du screen
-     * @param e Moteur
+     * Ajoute un entityListener au moteur
+     * @param e
      */
-    public void deload(final Engine e){
+    protected abstract void addEntityListeners(Engine e);
 
-        setProcessing(e, false);
-        e.removeAllEntities();
-    }
+    /**
+     * Initialise les listeners qui doivent l'être
+     * @param e
+     */
+    protected abstract void initListeners(Engine e);
 
     /**
      * Méthode à executer dans la méthode show du screen, active les systems et ajoute les entités
@@ -62,21 +49,10 @@ public abstract class AbsScreenLoader {
      */
     public void load(Engine e, SpriteBatch b, OrthographicCamera c){
 
-        setProcessing(e, true);
         addEntities(e, b, c);
-    }
-
-    /**
-     * Modifier le processing de tous les systems utilisé par le screen
-     * @param e Moteur
-     * @param process bool isProcess
-     */
-    private void setProcessing(final Engine e, final boolean process){
-
-        for (Class<? extends EntitySystem> s :
-                classSystems) {
-            e.getSystem(s).setProcessing(process);
-        }
+        addSystems(e, b, c);
+        addEntityListeners(e);
+        initListeners(e);
     }
 
 }
